@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deventhiran M | Sales Manager – Rivulis Irrigation</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              950: '#060F1E',
+              900: '#0A192F',
+              800: '#112240',
+              700: '#1D3557',
+              600: '#233554',
+            },
+            slateAccent: '#475569',
+            ice: '#F8FAFC',
+          },
+          fontFamily: {
+            display: ['"Plus Jakarta Sans"', 'sans-serif'],
+            sans: ['"Inter"', 'sans-serif'],
+          },
+          boxShadow: {
+            card: '0 10px 30px -15px rgba(10, 25, 47, 0.12)',
+            cardHover: '0 20px 35px -15px rgba(10, 25, 47, 0.2)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #0A192F;
+      background-color: #FFFFFF;
+    }
+
+    h1, h2, h3, h4, .font-display {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Subtle fade-in reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Editable mode styling */
+    body.edit-mode [data-editable="true"] {
+      outline: 2px dashed rgba(29, 53, 87, 0.45);
+      outline-offset: 4px;
+      border-radius: 6px;
+      background-color: rgba(241, 245, 249, 0.75);
+      cursor: text;
+      transition: background-color 0.2s ease, outline-color 0.2s ease;
+    }
+
+    body.edit-mode [data-editable="true"]:hover,
+    body.edit-mode [data-editable="true"]:focus {
+      outline: 2px solid #0A192F;
+      background-color: #EFF6FF;
+    }
+
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-white text-navy-900 antialiased selection:bg-navy-900 selection:text-white">
+
+  <!-- Top Navigation Bar -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 lg:h-20">
+        <!-- Brand / Name -->
+        <a href="#home" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-lg bg-navy-900 text-white font-display font-bold flex items-center justify-center tracking-tight shadow-sm group-hover:bg-navy-800 transition">
+            DM
+          </div>
+          <div>
+            <span class="block font-display font-bold text-navy-900 text-base sm:text-lg leading-none" data-editable="true" data-key="brandName">Deventhiran M</span>
+            <span class="block text-xs text-slate-500 mt-1" data-editable="true" data-key="brandRole">Sales Manager · Rivulis Irrigation</span>
+          </div>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden xl:flex items-center gap-6 text-sm font-medium text-slate-600">
+          <a href="#home" class="hover:text-navy-900 transition">Home</a>
+          <a href="#about" class="hover:text-navy-900 transition">About & Education</a>
+          <a href="#skills" class="hover:text-navy-900 transition">Skills</a>
+          <a href="#experience" class="hover:text-navy-900 transition">Experience</a>
+          <a href="#internships" class="hover:text-navy-900 transition">Internships</a>
+          <a href="#project" class="hover:text-navy-900 transition">Project</a>
+          <a href="#credentials" class="hover:text-navy-900 transition">Certifications & Honors</a>
+          <a href="#contact" class="hover:text-navy-900 transition">Contact</a>
+        </nav>
+
+        <!-- Edit Controls + Mobile Menu Button -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <button
+            id="toggleEditBtn"
+            type="button"
+            onclick="toggleEditMode()"
+            class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold border border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white transition cursor-pointer"
+            title="Toggle inline editing for every section"
+          >
+            <i data-lucide="pencil" class="w-4 h-4"></i>
+            <span id="editBtnText">Edit Portfolio</span>
+          </button>
+
+          <button
+            id="resetEditsBtn"
+            type="button"
+            onclick="resetPortfolioData()"
+            class="hidden items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition cursor-pointer"
+            title="Restore original details"
+          >
+            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+            <span>Reset</span>
+          </button>
+
+          <button
+            id="mobileMenuBtn"
+            type="button"
+            onclick="toggleMobileMenu()"
+            class="xl:hidden p-2 rounded-lg text-navy-900 hover:bg-slate-100 transition"
+            aria-label="Toggle Menu"
+          >
+            <i data-lucide="menu" class="w-6 h-6"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileMenu" class="hidden xl:hidden bg-white border-t border-slate-200 px-4 py-4 space-y-2 text-sm font-medium text-slate-700">
+      <a href="#home" onclick="closeMobileMenu()" class="block py-2 px-3 rounded-lg hover:bg-slate-100 hover:text-navy-900">Home</a>
+      <a href="#about" onclick="closeMobileMenu()" class="block py-2 px-3 rounded-lg hover:bg-slate-100 hover:text-navy-900">About & Education</a>
+      <a href="#skills" onclick="closeMobileMenu()" class="block py-2 px-3 rounded-lg hover:bg-slate-100 hover:text-navy-900">Professional Skills</a>
+      <a href="#experience" onclick="closeMobileMenu()" class="block py-2 px-3 rounded-lg hover:bg-slate-100 hover:text-navy-900">Work Experience</a>
+      <a href="#internships" onclick="closeMobileMenu()" class="block py-2 px-3 rounded-lg hover:bg-slate-100 hover:text-navy-900">Internships</a>
+      <a href="#project" onclick="closeMobileMenu()" class="block py-2 px-3 rounded-lg hover:bg-slate-100 hover:text-navy-900">Academic Project</a>
+      <a href="#credentials" onclick="closeMobileMenu()" class="block py-2 px-3 rounded-lg hover:bg-slate-100 hover:text-navy-900">Certifications & Achievements</a>
+      <a href="#contact" onclick="closeMobileMenu()" class="block py-2 px-3 rounded-lg hover:bg-slate-100 hover:text-navy-900">Contact</a>
+    </div>
+  </header>
+
+  <!-- Editing Banner (Visible when Edit Mode is Active) -->
+  <div id="editBanner" class="hidden bg-navy-800 text-white text-xs sm:text-sm py-2.5 px-4 no-print">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <i data-lucide="sparkles" class="w-4 h-4 text-sky-300 shrink-0"></i>
+        <span><strong>Edit Mode Active:</strong> Click any highlighted text or field across the page to edit directly. Changes save automatically in your browser.</span>
+      </div>
+      <button type="button" onclick="toggleEditMode()" class="underline font-semibold text-sky-200 hover:text-white cursor-pointer">
+        Done Editing
+      </button>
+    </div>
+  </div>
+
+  <!-- 1. HOME SECTION -->
+  <section id="home" class="relative bg-navy-900 text-white overflow-hidden">
+    <!-- Subtle geometric grid accent -->
+    <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 28px 28px;"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- Left Intro -->
+        <div class="lg:col-span-7 space-y-6 reveal">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-navy-800 border border-white/15 text-xs sm:text-sm font-medium text-slate-200">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span data-editable="true" data-key="heroBadge">Sales Manager at Rivulis Irrigation · B.Tech Agricultural Engineering</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight leading-tight">
+            <span data-editable="true" data-key="heroName">Deventhiran M</span>
+          </h1>
+
+          <p class="text-lg sm:text-xl text-slate-300 font-medium" data-editable="true" data-key="heroSubtitle">
+            Sales Manager at Rivulis Irrigation | Agricultural Engineering Graduate, Anna University
+          </p>
+
+          <p class="text-base text-slate-300/90 leading-relaxed max-w-2xl" data-editable="true" data-key="heroIntro">
+            Agricultural engineering background paired with commercial sales leadership at Rivulis Irrigation. Grounded in practical crop-water understanding, food and agribusiness exposure across production and marketing, and hands-on engineering problem-solving.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-4 pt-2 no-print">
+            <a href="#experience" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-white text-navy-900 font-semibold text-sm hover:bg-slate-100 transition shadow-md">
+              <i data-lucide="briefcase" class="w-4 h-4"></i>
+              <span>View Experience</span>
+            </a>
+            <a href="#contact" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-navy-800 text-white border border-white/20 font-semibold text-sm hover:bg-navy-700 transition">
+              <i data-lucide="mail" class="w-4 h-4"></i>
+              <span>Get in Touch</span>
+            </a>
+          </div>
+
+          <!-- Key factual highlights -->
+          <div class="grid grid-cols-3 gap-4 pt-6 border-t border-white/15 max-w-xl">
+            <div>
+              <div class="text-xl sm:text-2xl font-display font-bold text-white" data-editable="true" data-key="statRole">Sales Mgr</div>
+              <div class="text-xs text-slate-400 mt-0.5" data-editable="true" data-key="statRoleSub">Rivulis Irrigation</div>
+            </div>
+            <div>
+              <div class="text-xl sm:text-2xl font-display font-bold text-white" data-editable="true" data-key="statCgpa">7.8 CGPA</div>
+              <div class="text-xs text-slate-400 mt-0.5" data-editable="true" data-key="statCgpaSub">Anna University</div>
+            </div>
+            <div>
+              <div class="text-xl sm:text-2xl font-display font-bold text-white" data-editable="true" data-key="statNptel">68%</div>
+              <div class="text-xs text-slate-400 mt-0.5" data-editable="true" data-key="statNptelSub">NPTEL Soil Fertility</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Professional Profile Photo Card -->
+        <div class="lg:col-span-5 flex justify-center reveal">
+          <div class="w-full max-w-sm bg-navy-800 border border-white/15 rounded-2xl p-5 shadow-2xl">
+            <div class="relative aspect-[4/5] w-full rounded-xl overflow-hidden bg-navy-950 border border-white/10 flex flex-col items-center justify-center text-center p-6">
+              <img
+                id="profilePhotoImg"
+                src=""
+                alt="Deventhiran M professional profile photo"
+                class="hidden w-full h-full object-cover"
+                onerror="this.classList.add('hidden'); document.getElementById('photoPlaceholder').classList.remove('hidden');"
+              />
+              <div id="photoPlaceholder" class="flex flex-col items-center justify-center space-y-3">
+                <div class="w-24 h-24 rounded-full bg-navy-800 border-2 border-white/25 flex items-center justify-center text-white font-display text-3xl font-bold">
+                  DM
+                </div>
+                <p class="text-sm font-semibold text-white">Professional Profile Photo Placeholder</p>
+                <p class="text-xs text-slate-400 max-w-[220px]">
+                  Click "Upload Photo" below to add Deventhiran M's portrait image.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-4 flex items-center justify-between gap-2">
+              <div>
+                <p class="font-display font-bold text-white text-sm" data-editable="true" data-key="photoCaptionName">Deventhiran M</p>
+                <p class="text-xs text-slate-400" data-editable="true" data-key="photoCaptionSub">Sales Manager · Rivulis Irrigation</p>
+              </div>
+              <label class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-medium cursor-pointer transition no-print">
+                <i data-lucide="camera" class="w-3.5 h-3.5"></i>
+                <span>Upload Photo</span>
+                <input type="file" accept="image/*" class="hidden" onchange="handleProfilePhotoUpload(event)" />
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. ABOUT ME & EDUCATION -->
+  <section id="about" class="py-20 lg:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-12 reveal">
+        <span class="text-xs font-bold uppercase tracking-widest text-navy-700">Profile & Academics</span>
+        <h2 class="text-3xl sm:text-4xl font-display font-bold text-navy-900 mt-2">About Me & Education</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- About Me -->
+        <div class="lg:col-span-7 bg-ice border border-slate-200 rounded-2xl p-7 sm:p-8 shadow-card reveal">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-10 h-10 rounded-lg bg-navy-900 text-white flex items-center justify-center">
+              <i data-lucide="user-check" class="w-5 h-5"></i>
+            </div>
+            <h3 class="text-xl font-display font-bold text-navy-900">About Me</h3>
+          </div>
+
+          <div class="space-y-4 text-slate-700 leading-relaxed text-sm sm:text-base">
+            <p data-editable="true" data-key="aboutP1">
+              I am Deventhiran M, currently serving as a Sales Manager at Rivulis Irrigation. My academic foundation in Agricultural Engineering from Anna University informs how I approach irrigation solutions, soil-water relationships, and customer needs on the ground.
+            </p>
+            <p data-editable="true" data-key="aboutP2">
+              Alongside my sales role, my background includes internship experience across production and marketing at VIBIS Honey and operations at Thillais Masala, an academic engineering project on an Ultrasonic Sensor-Based Virtual Fencing System, NPTEL certification in Soil Fertility and Fertilizers, college hackathons, and university-level football representation.
+            </p>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="lg:col-span-5 bg-navy-900 text-white rounded-2xl p-7 sm:p-8 shadow-card reveal">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-lg bg-white/10 text-white flex items-center justify-center">
+              <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+            </div>
+            <h3 class="text-xl font-display font-bold">Education</h3>
+          </div>
+
+          <div class="border-l-2 border-white/25 pl-5 space-y-3">
+            <div class="inline-block px-2.5 py-1 rounded bg-white/10 text-xs font-semibold text-slate-200" data-editable="true" data-key="eduBadge">
+              Bachelor's Degree
+            </div>
+            <h4 class="text-lg sm:text-xl font-display font-bold text-white" data-editable="true" data-key="eduDegree">
+              B.Tech in Agricultural Engineering
+            </h4>
+            <p class="text-slate-300 text-sm font-medium" data-editable="true" data-key="eduUniversity">
+              Anna University
+            </p>
+            <div class="pt-2 flex items-center justify-between bg-navy-800/90 border border-white/10 rounded-xl px-4 py-3">
+              <span class="text-xs uppercase tracking-wider text-slate-400">Academic Standing</span>
+              <span class="font-display font-bold text-base text-white" data-editable="true" data-key="eduCgpa">CGPA: 7.8</span>
+            </div>
+            <p class="text-xs text-slate-400 pt-1" data-editable="true" data-key="eduDates">
+              Graduation Year / Duration: [Add Dates Placeholder]
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. PROFESSIONAL SKILLS -->
+  <section id="skills" class="py-20 lg:py-24 bg-ice border-y border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-12 reveal">
+        <span class="text-xs font-bold uppercase tracking-widest text-navy-700">Core Capabilities</span>
+        <h2 class="text-3xl sm:text-4xl font-display font-bold text-navy-900 mt-2">Professional Skills</h2>
+        <p class="text-slate-600 mt-2 text-sm sm:text-base">
+          Core competencies aligned with Deventhiran M's role, education, internships, and technical project. Click any item in Edit Mode to customize.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Skill Group 1 -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-card hover:shadow-cardHover transition reveal">
+          <div class="w-11 h-11 rounded-xl bg-navy-900 text-white flex items-center justify-center mb-4">
+            <i data-lucide="trending-up" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-lg font-display font-bold text-navy-900 mb-3" data-editable="true" data-key="skillCat1Title">Sales & Market Engagement</h3>
+          <ul class="space-y-2.5 text-sm text-slate-700">
+            <li class="flex items-start gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-navy-900 mt-0.5 shrink-0"></i>
+              <span data-editable="true" data-key="skill1a">Irrigation Sales & Customer Relations</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-navy-900 mt-0.5 shrink-0"></i>
+              <span data-editable="true" data-key="skill1b">Product & Market Outreach (VIBIS Honey Internship)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-navy-900 mt-0.5 shrink-0"></i>
+              <span data-editable="true" data-key="skill1c">[Add Additional Sales / Territory Skill Placeholder]</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Skill Group 2 -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-card hover:shadow-cardHover transition reveal">
+          <div class="w-11 h-11 rounded-xl bg-navy-900 text-white flex items-center justify-center mb-4">
+            <i data-lucide="sprout" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-lg font-display font-bold text-navy-900 mb-3" data-editable="true" data-key="skillCat2Title">Agricultural & Production Domain</h3>
+          <ul class="space-y-2.5 text-sm text-slate-700">
+            <li class="flex items-start gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-navy-900 mt-0.5 shrink-0"></i>
+              <span data-editable="true" data-key="skill2a">Agricultural Engineering Fundamentals</span>
+            </li>
+            <li class="flex systems-start gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-navy-900 mt-0.5 shrink-0"></i>
+              <span data-editable="true" data-key="skill2b">Soil Fertility & Fertilizers (NPTEL – 68%)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-navy-900 mt-0.5 shrink-0"></i>
+              <span data-editable="true" data-key="skill2c">Production & Processing Exposure (VIBIS Honey & Thillais Masala)</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Skill Group 3 -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-card hover:shadow-cardHover transition reveal">
+          <div class="w-11 h-11 rounded-xl bg-navy-900 text-white flex items-center justify-center mb-4">
+            <i data-lucide="cpu" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-lg font-display font-bold text-navy-900 mb-3" data-editable="true" data-key="skillCat3Title">Applied Tech & Teamwork</h3>
+          <ul class="space-y-2.5 text-sm text-slate-700">
+            <li class="flex items-start gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-navy-900 mt-0.5 shrink-0"></i>
+              <span data-editable="true" data-key="skill3a">Ultrasonic Sensor System Concepts (Academic Project)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-navy-900 mt-0.5 shrink-0"></i>
+              <span data-editable="true" data-key="skill3b">Rapid Problem-Solving (3 College Hackathons)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-navy-900 mt-0.5 shrink-0"></i>
+              <span data-editable="true" data-key="skill3c">Team Coordination & Sportsmanship (Anna University Football)</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. WORK EXPERIENCE – RIVULIS IRRIGATION -->
+  <section id="experience" class="py-20 lg:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-12 reveal">
+        <span class="text-xs font-bold uppercase tracking-widest text-navy-700">Current Role</span>
+        <h2 class="text-3xl sm:text-4xl font-display font-bold text-navy-900 mt-2">Work Experience</h2>
+      </div>
+
+      <div class="bg-white border-2 border-navy-900/15 rounded-2xl p-7 sm:p-10 shadow-card reveal">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 border-b border-slate-200">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-navy-900 text-white text-xs font-semibold mb-3">
+              <i data-lucide="building-2" class="w-3.5 h-3.5"></i>
+              <span data-editable="true" data-key="expCompanyBadge">Rivulis Irrigation</span>
+            </div>
+            <h3 class="text-2xl font-display font-bold text-navy-900" data-editable="true" data-key="expRoleTitle">
+              Sales Manager
+            </h3>
+            <p class="text-slate-600 font-medium mt-1" data-editable="true" data-key="expCompanySubtitle">
+              Rivulis Irrigation · <span class="text-slate-500">[Location Placeholder]</span>
+            </p>
+          </div>
+
+          <div class="text-left md:text-right">
+            <span class="inline-block px-3.5 py-1.5 rounded-lg bg-slate-100 text-navy-900 text-xs sm:text-sm font-semibold" data-editable="true" data-key="expTenure">
+              [Tenure / Start Date – Present Placeholder]
+            </span>
+          </div>
+        </div>
+
+        <div class="pt-6 space-y-4">
+          <p class="text-slate-700 leading-relaxed text-sm sm:text-base" data-editable="true" data-key="expOverview">
+            Serving as Sales Manager at Rivulis Irrigation, bridging agricultural engineering knowledge with irrigation solution sales and client engagement.
+          </p>
+
+          <div class="bg-ice border border-slate-200 rounded-xl p-5">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-navy-900 mb-3">Role Details & Editable Notes</h4>
+            <ul class="space-y-2.5 text-sm text-slate-700">
+              <li class="flex items-start gap-2.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-navy-900 mt-2 shrink-0"></span>
+                <span data-editable="true" data-key="expBullet1">Sales Manager at Rivulis Irrigation — [Add specific territory, product lines, or key responsibilities in Edit Mode].</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-navy-900 mt-2 shrink-0"></span>
+                <span data-editable="true" data-key="expBullet2">[Add verified sales milestones, account coverage, or client segments when ready].</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. INTERNSHIPS -->
+  <section id="internships" class="py-20 lg:py-24 bg-ice border-y border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-12 reveal">
+        <span class="text-xs font-bold uppercase tracking-widest text-navy-700">Industry Exposure</span>
+        <h2 class="text-3xl sm:text-4xl font-display font-bold text-navy-900 mt-2">Internships</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Internship 1: VIBIS Honey -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-7 shadow-card hover:shadow-cardHover transition reveal">
+          <div class="flex items-start justify-between gap-4 mb-4">
+            <div class="w-11 h-11 rounded-xl bg-navy-900 text-white flex items-center justify-center shrink-0">
+              <i data-lucide="package-check" class="w-5 h-5"></i>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-slate-100 text-navy-900 text-xs font-semibold" data-editable="true" data-key="intern1Dates">
+              [Duration / Dates Placeholder]
+            </span>
+          </div>
+
+          <h3 class="text-xl font-display font-bold text-navy-900" data-editable="true" data-key="intern1Company">
+            VIBIS Honey
+          </h3>
+          <p class="text-sm font-semibold text-navy-700 mt-1" data-editable="true" data-key="intern1Focus">
+            Internship · Production & Marketing
+          </p>
+
+          <p class="text-sm text-slate-700 leading-relaxed mt-4" data-editable="true" data-key="intern1Desc">
+            Gained hands-on internship exposure in both production and marketing at VIBIS Honey.
+          </p>
+
+          <div class="mt-4 pt-4 border-t border-slate-100 text-xs text-slate-600 space-y-1.5">
+            <p data-editable="true" data-key="intern1Note1">• Production & Marketing focus area — [Add specific tasks or learnings in Edit Mode].</p>
+            <p data-editable="true" data-key="intern1Note2">• Location: [Add Location Placeholder]</p>
+          </div>
+        </div>
+
+        <!-- Internship 2: Thillais Masala -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-7 shadow-card hover:shadow-cardHover transition reveal">
+          <div class="flex items-start justify-between gap-4 mb-4">
+            <div class="w-11 h-11 rounded-xl bg-navy-900 text-white flex items-center justify-center shrink-0">
+              <i data-lucide="factory" class="w-5 h-5"></i>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-slate-100 text-navy-900 text-xs font-semibold" data-editable="true" data-key="intern2Dates">
+              [Duration / Dates Placeholder]
+            </span>
+          </div>
+
+          <h3 class="text-xl font-display font-bold text-navy-900" data-editable="true" data-key="intern2Company">
+            Thillais Masala
+          </h3>
+          <p class="text-sm font-semibold text-navy-700 mt-1" data-editable="true" data-key="intern2Focus">
+            Internship · [Role / Department Placeholder]
+          </p>
+
+          <p class="text-sm text-slate-700 leading-relaxed mt-4" data-editable="true" data-key="intern2Desc">
+            Completed internship experience with Thillais Masala.
+          </p>
+
+          <div class="mt-4 pt-4 border-t border-slate-100 text-xs text-slate-600 space-y-1.5">
+            <p data-editable="true" data-key="intern2Note1">• [Add specific internship focus, department, or takeaways in Edit Mode].</p>
+            <p data-editable="true" data-key="intern2Note2">• Location: [Add Location Placeholder]</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. ACADEMIC PROJECT -->
+  <section id="project" class="py-20 lg:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-12 reveal">
+        <span class="text-xs font-bold uppercase tracking-widest text-navy-700">Engineering Capstone</span>
+        <h2 class="text-3xl sm:text-4xl font-display font-bold text-navy-900 mt-2">Academic Project</h2>
+      </div>
+
+      <div class="bg-navy-900 text-white rounded-2xl p-7 sm:p-10 shadow-card reveal">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-8 space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-xs font-semibold text-slate-200">
+              <i data-lucide="radar" class="w-3.5 h-3.5 text-sky-300"></i>
+              <span data-editable="true" data-key="projTag">B.Tech Agricultural Engineering Project · Anna University</span>
+            </div>
+
+            <h3 class="text-2xl sm:text-3xl font-display font-bold text-white" data-editable="true" data-key="projTitle">
+              Ultrasonic Sensor-Based Virtual Fencing System
+            </h3>
+
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed" data-editable="true" data-key="projDesc">
+              Academic project centered on an ultrasonic sensor-based virtual fencing system designed around proximity detection concepts without relying solely on conventional physical boundary barriers.
+            </p>
+
+            <div class="pt-2 text-xs sm:text-sm text-slate-300 bg-navy-800/90 border border-white/10 rounded-xl p-4">
+              <p class="font-semibold text-white mb-1">Editable Project Notes:</p>
+              <p data-editable="true" data-key="projNotes">
+                [Add hardware components, microcontroller/sensor setup, testing context, or team role details here when editing].
+              </p>
+            </div>
+          </div>
+
+          <div class="lg:col-span-4 bg-navy-800 border border-white/10 rounded-xl p-6 space-y-4">
+            <h4 class="font-display font-bold text-base text-white">Project Snapshot</h4>
+            <div class="space-y-3 text-sm">
+              <div class="flex justify-between gap-2 pb-2 border-b border-white/10">
+                <span class="text-slate-400">Title</span>
+                <span class="font-medium text-right text-white" data-editable="true" data-key="projSnapTitle">Ultrasonic Virtual Fencing</span>
+              </div>
+              <div class="flex justify-between gap-2 pb-2 border-b border-white/10">
+                <span class="text-slate-400">Program</span>
+                <span class="font-medium text-right text-white" data-editable="true" data-key="projSnapProg">B.Tech Agri Engg</span>
+              </div>
+              <div class="flex justify-between gap-2">
+                <span class="text-slate-400">Timeline</span>
+                <span class="font-medium text-right text-slate-200" data-editable="true" data-key="projSnapYear">[Academic Year Placeholder]</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 & 8. CERTIFICATIONS AND ACHIEVEMENTS -->
+  <section id="credentials" class="py-20 lg:py-24 bg-ice border-y border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <!-- 7. Certifications -->
+        <div class="lg:col-span-7 reveal">
+          <span class="text-xs font-bold uppercase tracking-widest text-navy-700">Verified Credentials</span>
+          <h2 class="text-3xl font-display font-bold text-navy-900 mt-2 mb-6">Certifications</h2>
+
+          <div class="space-y-5">
+            <!-- NPTEL Certification -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-card">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-9 h-9 rounded-lg bg-navy-900 text-white flex items-center justify-center">
+                    <i data-lucide="award" class="w-4 h-4"></i>
+                  </div>
+                  <h3 class="text-lg font-display font-bold text-navy-900" data-editable="true" data-key="certNptelTitle">
+                    NPTEL – Soil Fertility and Fertilizers
+                  </h3>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-navy-900 text-white text-xs font-bold" data-editable="true" data-key="certNptelScore">
+                  Score: 68%
+                </span>
+              </div>
+              <p class="text-sm text-slate-600" data-editable="true" data-key="certNptelDesc">
+                Completed NPTEL course in Soil Fertility and Fertilizers with a score of 68%.
+              </p>
+            </div>
+
+            <!-- 3 College Hackathon Certificates -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-card">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-9 h-9 rounded-lg bg-navy-900 text-white flex items-center justify-center">
+                    <i data-lucide="file-badge" class="w-4 h-4"></i>
+                  </div>
+                  <h3 class="text-lg font-display font-bold text-navy-900" data-editable="true" data-key="certHackTitle">
+                    College Hackathon Participation Certificates (3)
+                  </h3>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-slate-100 text-navy-900 text-xs font-semibold">
+                  3 Certificates
+                </span>
+              </div>
+              <p class="text-sm text-slate-600 mb-4" data-editable="true" data-key="certHackDesc">
+                Earned participation certificates across three college hackathons.
+              </p>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-ice border border-slate-200">
+                  <p class="font-bold text-navy-900">Hackathon Certificate 1</p>
+                  <p class="text-slate-600 mt-1" data-editable="true" data-key="hack1Detail">[Event Name / Year Placeholder]</p>
+                </div>
+                <div class="p-3 rounded-xl bg-ice border border-slate-200">
+                  <p class="font-bold text-navy-900">Hackathon Certificate 2</p>
+                  <p class="text-slate-600 mt-1" data-editable="true" data-key="hack2Detail">[Event Name / Year Placeholder]</p>
+                </div>
+                <div class="p-3 rounded-xl bg-ice border border-slate-200">
+                  <p class="font-bold text-navy-900">Hackathon Certificate 3</p>
+                  <p class="text-slate-600 mt-1" data-editable="true" data-key="hack3Detail">[Event Name / Year Placeholder]</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Achievements -->
+        <div class="lg:col-span-5 reveal">
+          <span class="text-xs font-bold uppercase tracking-widest text-navy-700">Athletics & Representation</span>
+          <h2 class="text-3xl font-display font-bold text-navy-900 mt-2 mb-6">Achievements</h2>
+
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-7 shadow-card h-full flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-navy-900 text-white flex items-center justify-center mb-4">
+                <i data-lucide="trophy" class="w-6 h-6"></i>
+              </div>
+
+              <h3 class="text-xl font-display font-bold text-navy-900" data-editable="true" data-key="achTitle">
+                Anna University Games – Football Participation
+              </h3>
+
+              <p class="text-sm text-slate-700 leading-relaxed mt-3" data-editable="true" data-key="achDesc">
+                Participated in football at the Anna University Games, demonstrating discipline, stamina, and collaborative team play.
+              </p>
+
+              <div class="mt-4 p-4 rounded-xl bg-ice border border-slate-200 text-xs text-slate-600 space-y-1.5">
+                <p class="font-semibold text-navy-900">Additional Editable Details:</p>
+                <p data-editable="true" data-key="achExtra">• Edition / Year / College Team: [Add details in Edit Mode]</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. CONTACT SECTION -->
+  <section id="contact" class="py-20 lg:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-12 reveal">
+        <span class="text-xs font-bold uppercase tracking-widest text-navy-700">Connect</span>
+        <h2 class="text-3xl sm:text-4xl font-display font-bold text-navy-900 mt-2">Contact Deventhiran M</h2>
+        <p class="text-slate-600 mt-2 text-sm sm:text-base">
+          Contact fields use placeholders where personal details were not provided—click any field in Edit Mode to add real contact information.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Contact Details Card -->
+        <div class="lg:col-span-5 bg-navy-900 text-white rounded-2xl p-7 sm:p-8 shadow-card space-y-6 reveal">
+          <h3 class="text-xl font-display font-bold">Contact Information</h3>
+
+          <div class="space-y-4 text-sm">
+            <div class="flex items-start gap-3.5">
+              <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+                <i data-lucide="mail" class="w-4 h-4 text-sky-300"></i>
+              </div>
+              <div>
+                <p class="text-xs text-slate-400">Email</p>
+                <p class="font-medium text-white mt-0.5" data-editable="true" data-key="contactEmail">[deventhiran.placeholder@email.com]</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3.5">
+              <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+                <i data-lucide="phone" class="w-4 h-4 text-sky-300"></i>
+              </div>
+              <div>
+                <p class="text-xs text-slate-400">Phone</p>
+                <p class="font-medium text-white mt-0.5" data-editable="true" data-key="contactPhone">[+91 XXXXX XXXXX Placeholder]</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3.5">
+              <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+                <i data-lucide="map-pin" class="w-4 h-4 text-sky-300"></i>
+              </div>
+              <div>
+                <p class="text-xs text-slate-400">Location</p>
+                <p class="font-medium text-white mt-0.5" data-editable="true" data-key="contactLocation">[City, Tamil Nadu, India – Placeholder]</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3.5">
+              <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+                <i data-lucide="linkedin" class="w-4 h-4 text-sky-300"></i>
+              </div>
+              <div>
+                <p class="text-xs text-slate-400">LinkedIn</p>
+                <p class="font-medium text-white mt-0.5" data-editable="true" data-key="contactLinkedin">[linkedin.com/in/deventhiran-m-placeholder]</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inquiry Form -->
+        <div class="lg:col-span-7 bg-ice border border-slate-200 rounded-2xl p-7 sm:p-8 shadow-card reveal">
+          <h3 class="text-xl font-display font-bold text-navy-900 mb-4">Send a Message</h3>
+          <form id="contactForm" onsubmit="handleContactSubmit(event)" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">Your Name</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Enter your name"
+                  class="w-full px-4 py-2.5 rounded-lg bg-white border border-slate-300 text-sm text-navy-900 focus:outline-none focus:border-navy-900"
+                />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">Your Email</label>
+                <input
+                  type="email"
+                  required
+                  placeholder="you@example.com"
+                  class="w-full px-4 py-2.5 rounded-lg bg-white border border-slate-300 text-sm text-navy-900 focus:outline-none focus:border-navy-900"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">Subject</label>
+              <input
+                type="text"
+                required
+                placeholder="Irrigation sales, collaboration, or general inquiry"
+                class="w-full px-4 py-2.5 rounded-lg bg-white border border-slate-300 text-sm text-navy-900 focus:outline-none focus:border-navy-900"
+              />
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">Message</label>
+              <textarea
+                rows="4"
+                required
+                placeholder="Write your message here..."
+                class="w-full px-4 py-2.5 rounded-lg bg-white border border-slate-300 text-sm text-navy-900 focus:outline-none focus:border-navy-900"
+              ></textarea>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-4 pt-1">
+              <button
+                type="submit"
+                class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-navy-900 text-white text-sm font-semibold hover:bg-navy-800 transition cursor-pointer"
+              >
+                <i data-lucide="send" class="w-4 h-4"></i>
+                <span>Send Message</span>
+              </button>
+
+              <p id="formStatus" class="text-xs sm:text-sm font-medium text-emerald-700 hidden">
+                Message prepared locally. Connect a form backend or email client to send live inquiries.
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-navy-950 text-slate-400 py-8 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm">
+      <p data-editable="true" data-key="footerCopy">
+        © <span id="yearSpan">2026</span> Deventhiran M · Sales Manager, Rivulis Irrigation
+      </p>
+      <p data-editable="true" data-key="footerSub">
+        B.Tech Agricultural Engineering · Anna University
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Set current year if present
+    const yearEl = document.getElementById('yearSpan');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    const STORAGE_KEY = 'deventhiran_portfolio_data_v1';
+    const PHOTO_KEY = 'deventhiran_portfolio_photo_v1';
+    let isEditMode = false;
+
+    // Save all editable fields to localStorage
+    function saveEditableFields() {
+      const data = {};
+      document.querySelectorAll('[data-editable="true"]').forEach((el) => {
+        const key = el.getAttribute('data-key');
+        if (key) {
+          data[key] = el.innerHTML;
+        }
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      document.getElementById('resetEditsBtn').classList.remove('hidden');
+      document.getElementById('resetEditsBtn').classList.add('inline-flex');
+    }
+
+    // Load saved editable fields on startup
+    function loadSavedData() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          document.querySelectorAll('[data-editable="true"]').forEach((el) => {
+            const key = el.getAttribute('data-key');
+            if (key && Object.prototype.hasOwnProperty.call(parsed, key)) {
+              el.innerHTML = parsed[key];
+            }
+          });
+          document.getElementById('resetEditsBtn').classList.remove('hidden');
+          document.getElementById('resetEditsBtn').classList.add('inline-flex');
+        } catch (err) {
+          console.error('Could not load saved portfolio data:', err);
+        }
+      }
+
+      const savedPhoto = localStorage.getItem(PHOTO_KEY);
+      if (savedPhoto) {
+        const img = document.getElementById('profilePhotoImg');
+        const placeholder = document.getElementById('photoPlaceholder');
+        img.src = savedPhoto;
+        img.classList.remove('hidden');
+        placeholder.classList.add('hidden');
+      }
+    }
+
+    // Toggle edit mode across all sections
+    function toggleEditMode() {
+      isEditMode = !isEditMode;
+      document.body.classList.toggle('edit-mode', isEditMode);
+
+      const banner = document.getElementById('editBanner');
+      const btnText = document.getElementById('editBtnText');
+
+      if (isEditMode) {
+        banner.classList.remove('hidden');
+        btnText.textContent = 'Save & Exit Edit';
+      } else {
+        banner.classList.add('hidden');
+        btnText.textContent = 'Edit Portfolio';
+        saveEditableFields();
+      }
+
+      document.querySelectorAll('[data-editable="true"]').forEach((el) => {
+        el.setAttribute('contenteditable', isEditMode ? 'true' : 'false');
+        el.oninput = isEditMode ? saveEditableFields : null;
+      });
+    }
+
+    // Reset edits back to initial HTML
+    function resetPortfolioData() {
+      if (confirm('Reset all edits and uploaded profile photo back to original defaults?')) {
+        localStorage.removeItem(STORAGE_KEY);
+        localStorage.removeItem(PHOTO_KEY);
+        window.location.reload();
+      }
+    }
+
+    // Handle profile photo upload
+    function handleProfilePhotoUpload(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const dataUrl = e.target.result;
+        const img = document.getElementById('profilePhotoImg');
+        const placeholder = document.getElementById('photoPlaceholder');
+        img.src = dataUrl;
+        img.classList.remove('hidden');
+        placeholder.classList.add('hidden');
+        try {
+          localStorage.setItem(PHOTO_KEY, dataUrl);
+          document.getElementById('resetEditsBtn').classList.remove('hidden');
+          document.getElementById('resetEditsBtn').classList.add('inline-flex');
+        } catch (err) {
+          console.warn('Photo displayed for session; image size exceeded localStorage quota.');
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Mobile menu controls
+    function toggleMobileMenu() {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    }
+    function closeMobileMenu() {
+      document.getElementById('mobileMenu').classList.add('hidden');
+    }
+
+    // Contact form feedback
+    function handleContactSubmit(event) {
+      event.preventDefault();
+      const statusEl = document.getElementById('formStatus');
+      statusEl.classList.remove('hidden');
+      event.target.reset();
+    }
+
+    // IntersectionObserver for subtle animations
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    // Load saved data on ready
+    loadSavedData();
+  </script>
+</body>
+</html>
